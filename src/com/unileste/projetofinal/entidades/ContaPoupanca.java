@@ -58,5 +58,10 @@ public class ContaPoupanca extends Conta {
    @Override
     public String toString(){
         return super.toString()+", taxa de juros mensal="+taxaRendMensal;
-    }  
+    }
+    
+    public double getTaxaRendMensal() { //get para o DAO gravar a taxa
+    return taxaRendMensal;
+    }
+
 }

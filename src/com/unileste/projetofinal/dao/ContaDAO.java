@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.unileste.projetofinal.dao;
 
-/**
- *
- * @author geova
- */
-public class ContaDAO {
-    
+import com.unileste.projetofinal.entidades.Conta;
+import java.util.List;
+
+public interface ContaDAO {
+
+    //criar
+    void inserir(Conta conta);
+
+    //buscar uma conta
+    Conta buscarPorNumero(String numero);
+
+    //listar todas as conta
+    List<Conta> listarTodas();
+
+    //fazer update
+    void atualizar(Conta conta);
+
+    //deletar
+    void remover(String numero);
 }

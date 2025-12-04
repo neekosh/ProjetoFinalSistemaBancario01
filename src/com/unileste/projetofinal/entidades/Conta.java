@@ -76,4 +76,8 @@ public abstract class Conta {
                 ",proprietario=" + (proprietario != null ? proprietario.getNome() : "Sem Cliente") +
                 '}';
     }
+    
+    public void setSaldo(double saldo) { //usado pelo DAO só para carregar o valor do banco
+    this.saldo = saldo;
+    }
 }

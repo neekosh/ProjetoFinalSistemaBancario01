@@ -25,6 +25,7 @@ public class Cliente {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
+        this.contas = new ArrayList<>();
     }
 
     public String getNome() {
