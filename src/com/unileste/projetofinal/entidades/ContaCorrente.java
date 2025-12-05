@@ -1,5 +1,6 @@
 package com.unileste.projetofinal.entidades;
 import com.unileste.projetofinal.utilitarios.*;
+import javax.swing.JOptionPane;
 public class ContaCorrente extends Conta {
     private double limiteChequeEspecial;
 
@@ -15,8 +16,8 @@ public class ContaCorrente extends Conta {
     @Override
     public void depositar(double valor){
         if (valor <= 0){
-            throw new IllegalArgumentException(
-                    "Valor de depósito inválido. Use um valor maior que zero.");
+            JOptionPane.showMessageDialog(null,"Valor de depósito inválido. Use um valor maior que zero." );
+            throw new IllegalArgumentException("Valor de depósito inválido.");
         }
         saldo += valor;
         adicionarTransacao("Depósito de R$ " + String.format("%.2f", valor));
@@ -24,12 +25,14 @@ public class ContaCorrente extends Conta {
     @Override
     public void sacar(double valor) throws SaldoInsuficienteException {
         if (valor <= 0){
-            throw new IllegalArgumentException("Valor de saque inválido. Use um valor maior do que zero.");
+            JOptionPane.showMessageDialog(null,"Valor de saque inválido. Use um valor maior do que zero." );
+            throw new IllegalArgumentException("Valor de saque inválido.");
         }
 
         double limiteDisponivel = saldo + limiteChequeEspecial;
         if (valor > limiteDisponivel){
-            throw new SaldoInsuficienteException("Valor de saque insuficiente. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
+            JOptionPane.showMessageDialog(null,"Valor de saque insuficiente. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
+            throw new SaldoInsuficienteException("Valor de saque insuficiente.");
         }
 
         saldo -= valor;
@@ -42,15 +45,18 @@ public class ContaCorrente extends Conta {
             throws SaldoInsuficienteException {
 
         if (destino == null){
+            JOptionPane.showMessageDialog(null, "ERRO: Conta destino não encontrada");
             throw new IllegalArgumentException("Conta destino não encontrada.");
         }
         if (valor <= 0.0){
-            throw new IllegalArgumentException("Valor de transferência inválido. Use um valor maior que zero.");
+            JOptionPane.showMessageDialog(null, "Valor de transferência inválido. Use um valor maior que zero.");
+            throw new IllegalArgumentException("Valor de transferência inválido.");
         }
 
         double limiteDisponivel = saldo + limiteChequeEspecial;
         if (valor > limiteDisponivel){
-            throw new SaldoInsuficienteException("Saldo insuficiente para transferência. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente para transferência. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
+            throw new SaldoInsuficienteException("Saldo insuficiente para transferência.");
         }
 
         saldo -= valor;

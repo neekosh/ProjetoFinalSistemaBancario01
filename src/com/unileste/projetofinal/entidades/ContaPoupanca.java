@@ -1,5 +1,6 @@
 package com.unileste.projetofinal.entidades;
 import com.unileste.projetofinal.utilitarios.*;
+import javax.swing.JOptionPane;
 public class ContaPoupanca extends Conta {
     private double taxaRendMensal;
     
@@ -11,7 +12,8 @@ public class ContaPoupanca extends Conta {
     @Override
     public void depositar(double valor){
         if (valor <= 0){
-            throw new IllegalArgumentException("Valor de depósito inválido. Use um valor maior do que zero.");
+            JOptionPane.showMessageDialog(null,"Valor de depósito inválido. Use um valor maior do que zero." );
+            throw new IllegalArgumentException("Valor de depósito inválido");
         }
         
         saldo += valor;
@@ -20,9 +22,11 @@ public class ContaPoupanca extends Conta {
     @Override
     public void sacar(double valor) throws SaldoInsuficienteException {
         if (valor <= 0){
-            throw new IllegalArgumentException("Valor de saque inválido. Use um valor maior do que zero.");
+            JOptionPane.showMessageDialog(null,"Valor de saque inválido. Use um valor maior do que zero." );
+            throw new IllegalArgumentException("Valor de saque inválido");
         }
         if (valor > saldo){
+            JOptionPane.showMessageDialog(null, "Valor de saque inválido. Use um valor menor ou igual ao saldo disponível.");
             throw new SaldoInsuficienteException("Saldo insuficiente para o saque.");
         }
         
@@ -33,10 +37,12 @@ public class ContaPoupanca extends Conta {
    @Override
    public void transferir(Conta destino, double valor) throws SaldoInsuficienteException{
        if(valor <=0){
+           JOptionPane.showMessageDialog(null, "Valor inválido para a transerência. Use um valor maior do que zero");
            throw new IllegalArgumentException("Valor inválido para a transferência.");
        }
        
        if(valor > saldo){
+           JOptionPane.showMessageDialog(null, "Valor inválido para a transferência. Use um valor menor ou igual ao saldo disponível");
            throw new SaldoInsuficienteException("Saldo insuficiente para a transferência.");
        }else{
            // usa o método sacar da própria conta poupança
@@ -61,7 +67,7 @@ public class ContaPoupanca extends Conta {
     }
     
     public double getTaxaRendMensal() { //get para o DAO gravar a taxa
-    return taxaRendMensal;
+    return this.taxaRendMensal;
     }
 
 }

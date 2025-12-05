@@ -26,19 +26,258 @@ public class OperacoesPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        tituloOperacoes = new javax.swing.JLabel();
+        tituloDepositoSaque = new javax.swing.JLabel();
+        tituloNumeroConta = new javax.swing.JLabel();
+        txtNumeroConta = new javax.swing.JTextField();
+        tituloValorDepositoSaque = new javax.swing.JLabel();
+        txtValorDepositoSaque = new javax.swing.JTextField();
+        tituloTipoContaDepositoSaque = new javax.swing.JLabel();
+        txtTipoContaDepsitoSaque = new javax.swing.JTextField();
+        btnRealizarDeposito = new javax.swing.JButton();
+        btnRealizarSaque = new javax.swing.JButton();
+        tituloTransferencia = new javax.swing.JLabel();
+        tituloOrigemTransferencia = new javax.swing.JLabel();
+        txtOrigemTransferencia = new javax.swing.JTextField();
+        tituloContaDestinoTransferencia = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        tituloValorTransferencia = new javax.swing.JLabel();
+        txtValorTransferencia = new javax.swing.JTextField();
+        btnRealizarTransferencia = new javax.swing.JButton();
+        tituloHistoricoTransacoes = new javax.swing.JLabel();
+        btnListarHistoricoTransacoes = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 800));
+
+        tituloOperacoes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tituloOperacoes.setText("Operações");
+
+        tituloDepositoSaque.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloDepositoSaque.setText("Depósito / Saque");
+
+        tituloNumeroConta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloNumeroConta.setText("Número da Conta: ");
+
+        tituloValorDepositoSaque.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloValorDepositoSaque.setText("Valor:");
+
+        tituloTipoContaDepositoSaque.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloTipoContaDepositoSaque.setText("Tipo de Conta:");
+
+        txtTipoContaDepsitoSaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTipoContaDepsitoSaqueActionPerformed(evt);
+            }
+        });
+
+        btnRealizarDeposito.setText("Realizar Depósito");
+
+        btnRealizarSaque.setText("Realizar Saque");
+        btnRealizarSaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarSaqueActionPerformed(evt);
+            }
+        });
+
+        tituloTransferencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloTransferencia.setText("Transferência");
+
+        tituloOrigemTransferencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloOrigemTransferencia.setText("Conta origem:");
+
+        tituloContaDestinoTransferencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloContaDestinoTransferencia.setText("Conta destino:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        tituloValorTransferencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloValorTransferencia.setText("Valor:");
+
+        btnRealizarTransferencia.setText("Realizar Transferência");
+
+        tituloHistoricoTransacoes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloHistoricoTransacoes.setText("Histórico");
+
+        btnListarHistoricoTransacoes.setText("Listar Histórico");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloNumeroConta)
+                            .addComponent(tituloValorDepositoSaque)
+                            .addComponent(tituloOrigemTransferencia)
+                            .addComponent(tituloValorTransferencia))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtValorDepositoSaque, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                    .addComponent(txtNumeroConta))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(tituloTipoContaDepositoSaque)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTipoContaDepsitoSaque, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnRealizarDeposito)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnRealizarSaque))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtValorTransferencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                                    .addComponent(txtOrigemTransferencia, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addComponent(tituloContaDestinoTransferencia)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(btnRealizarTransferencia))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloDepositoSaque)
+                            .addComponent(tituloOperacoes)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(269, 269, 269)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloTransferencia)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(tituloHistoricoTransacoes))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(btnListarHistoricoTransacoes)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(tituloOperacoes)
+                .addGap(18, 18, 18)
+                .addComponent(tituloDepositoSaque)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloNumeroConta)
+                    .addComponent(txtNumeroConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloTipoContaDepositoSaque)
+                    .addComponent(txtTipoContaDepsitoSaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloValorDepositoSaque)
+                    .addComponent(txtValorDepositoSaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRealizarDeposito)
+                    .addComponent(btnRealizarSaque))
+                .addGap(35, 35, 35)
+                .addComponent(tituloTransferencia)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloOrigemTransferencia)
+                    .addComponent(txtOrigemTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloContaDestinoTransferencia)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tituloValorTransferencia)
+                            .addComponent(txtValorTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRealizarTransferencia)))
+                .addGap(18, 18, 18)
+                .addComponent(tituloHistoricoTransacoes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnListarHistoricoTransacoes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void txtTipoContaDepsitoSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoContaDepsitoSaqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoContaDepsitoSaqueActionPerformed
+
+    private void btnRealizarSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarSaqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRealizarSaqueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnListarHistoricoTransacoes;
+    private javax.swing.JButton btnRealizarDeposito;
+    private javax.swing.JButton btnRealizarSaque;
+    private javax.swing.JButton btnRealizarTransferencia;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel tituloContaDestinoTransferencia;
+    private javax.swing.JLabel tituloDepositoSaque;
+    private javax.swing.JLabel tituloHistoricoTransacoes;
+    private javax.swing.JLabel tituloNumeroConta;
+    private javax.swing.JLabel tituloOperacoes;
+    private javax.swing.JLabel tituloOrigemTransferencia;
+    private javax.swing.JLabel tituloTipoContaDepositoSaque;
+    private javax.swing.JLabel tituloTransferencia;
+    private javax.swing.JLabel tituloValorDepositoSaque;
+    private javax.swing.JLabel tituloValorTransferencia;
+    private javax.swing.JTextField txtNumeroConta;
+    private javax.swing.JTextField txtOrigemTransferencia;
+    private javax.swing.JTextField txtTipoContaDepsitoSaque;
+    private javax.swing.JTextField txtValorDepositoSaque;
+    private javax.swing.JTextField txtValorTransferencia;
     // End of variables declaration//GEN-END:variables
 }
