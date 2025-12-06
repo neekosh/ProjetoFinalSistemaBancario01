@@ -30,13 +30,12 @@ public class ContaCorrente extends Conta {
         }
 
         double limiteDisponivel = saldo + limiteChequeEspecial;
-        if (valor > limiteDisponivel){
-            JOptionPane.showMessageDialog(null,"Valor de saque insuficiente. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
-            throw new SaldoInsuficienteException("Valor de saque insuficiente.");
-        }
-
+        if (valor > limiteDisponivel) {
+               adicionarTransacao("Falha no saque: saldo insuficiente. Tentativa de sacar R$ "  + String.format("%.2f", valor));
+              throw new SaldoInsuficienteException("Valor de saque insuficiente.");
+            }
         saldo -= valor;
-        adicionarTransacao("Saque de R$ " + String.format("%.2f", valor));
+        adicionarTransacao("Saque de R$ " + String.format("%.2f", valor) +" realizado com sucesso!");
     }
 
 
@@ -54,13 +53,13 @@ public class ContaCorrente extends Conta {
         }
 
         double limiteDisponivel = saldo + limiteChequeEspecial;
-        if (valor > limiteDisponivel){
-            JOptionPane.showMessageDialog(null, "Saldo insuficiente para transferência. Limite disponível: R$ "+String.format("%.2f", limiteDisponivel));
-            throw new SaldoInsuficienteException("Saldo insuficiente para transferência.");
-        }
-
-        saldo -= valor;
         
+        if (valor > limiteDisponivel) {
+            adicionarTransacao("❌ Falha na transferência: tentativa de enviar R$ " + String.format("%.2f", valor) + " para a conta " + destino.getNumero() + " — saldo insuficiente.");
+            throw new SaldoInsuficienteException("Saldo insuficiente.");
+        }
+        
+        saldo -= valor;
         destino.depositar(valor);
 
         adicionarTransacao("Transferência de R$ "+String.format("%.2f", valor)+" para conta "+destino.getNumero());

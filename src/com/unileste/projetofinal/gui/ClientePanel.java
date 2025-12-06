@@ -195,7 +195,14 @@ public class ClientePanel extends javax.swing.JPanel {
     try {
         String cpf = txtCpf.getText();
         Cliente c = banco.buscarCliente(cpf); //chama o método buscar cliente da classe Banco
-        JOptionPane.showMessageDialog(this, "Cliente com o CPF: " +cpf+ " encontrado.");
+            JOptionPane.showMessageDialog(this,
+        "Cliente: \n\n" +
+        "Nome: " + c.getNome() + "\n" +
+        "CPF: " + c.getCpf() + "\n" +
+        "Endereço: " + c.getEndereco(),
+        "Dados do Cliente",
+        JOptionPane.INFORMATION_MESSAGE
+    );
         
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage());

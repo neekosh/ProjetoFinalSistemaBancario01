@@ -11,8 +11,34 @@ public class ContaPanel extends javax.swing.JPanel {
         this.banco = banco;
     }
 
-   
-    
+    private void carregarTabela() {
+    DefaultTableModel modelo = (DefaultTableModel) tabelaContas.getModel();
+    modelo.setRowCount(0); // limpa tabela
+
+    for (Conta c : banco.listarContas()) {
+
+     //instanceof -> um operador do Java que serve para verificar se um objeto é uma instância de uma classe específica
+     //Operador ternário -> jeito mais curto de escrever if- else. (condição) ? valor_se_verdadeiro :  valor_se_falso
+    String tipo = c instanceof ContaCorrente ? "CORRENTE" : "POUPANCA"; // A variável c é do tipo ContaCorrente?, se sim o valor da váriável é Corrente, se não é Poupança
+    String cpf = c.getProprietario().getCpf();
+
+    Double limite = c instanceof ContaCorrente ? ((ContaCorrente)c).getLimiteChequeEspecial(): null; //c é do tipo ContaCorrente? se sim, c pega o valor de limiteChequeEspecial, se não, mantém o valor como null
+
+    Double taxa = c instanceof ContaPoupanca ? ((ContaPoupanca)c).getTaxaRendMensal(): null; //taxa é do tipo ContaPoupanca? se sim, c pega o valor de taxaRendaMensal, se não, mantém o valor como null
+
+    //cria uma lista (array) contendo valores de tipos diferentes
+    //cada elemento dentro do {} vira uma coluna
+    modelo.addRow(new Object[]{
+        c.getNumero(), //coluna 1
+        tipo, //coluna 2
+        cpf, //coluna 3
+        limite, //coluna 4
+        taxa, //coluna 5
+        c.getSaldo()  //coluna 6
+    });
+}
+
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,6 +63,9 @@ public class ContaPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaContas = new javax.swing.JTable();
         btnExcluirConta = new javax.swing.JButton();
+        tituloBuscarContaPeloNumero = new javax.swing.JLabel();
+        tituloNumeroConta = new javax.swing.JLabel();
+        txtNumeroBusca = new javax.swing.JTextField();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 800));
 
@@ -127,81 +156,118 @@ public class ContaPanel extends javax.swing.JPanel {
             }
         });
 
+        tituloBuscarContaPeloNumero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tituloBuscarContaPeloNumero.setText("Buscar conta pelo número");
+
+        tituloNumeroConta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tituloNumeroConta.setText("Número da Conta:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(307, 307, 307)
+                .addComponent(tituloConta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(tituloConta))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(tituloTaxaRendimentoMensal)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtTaxaRendimentoMensal, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(tituloLimiteChequeEspecial)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtLimiteChequeEspecial))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tituloTipoConta)
-                                        .addComponent(tituloCpf)
-                                        .addComponent(tituloSaldo))
-                                    .addGap(53, 53, 53)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtTipoConta, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                                        .addComponent(txtCpf)
-                                        .addComponent(txtSaldo, javax.swing.GroupLayout.Alignment.TRAILING))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAbrirConta)
-                                .addGap(33, 33, 33)
-                                .addComponent(btnBuscarConta)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnListarContas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                                .addComponent(btnExcluirConta)))))
-                .addGap(34, 34, 34))
-            .addComponent(jScrollPane1)
+                                .addGap(43, 43, 43)
+                                .addComponent(tituloNumeroConta)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNumeroBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnBuscarConta))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(227, 227, 227)
+                                .addComponent(tituloBuscarContaPeloNumero))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(99, 99, 99)
+                                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tituloTipoConta)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addComponent(btnAbrirConta)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(156, 156, 156)
+                                        .addComponent(txtLimiteChequeEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnListarContas)
+                                        .addGap(94, 94, 94)
+                                        .addComponent(btnExcluirConta))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(tituloTaxaRendimentoMensal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTaxaRendimentoMensal, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tituloSaldo)
+                        .addGap(235, 235, 235)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tituloCpf)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tituloLimiteChequeEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                .addGap(237, 237, 237))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(tituloConta)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tituloTipoConta)
-                    .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tituloCpf)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tituloCpf)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloSaldo)
-                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tituloLimiteChequeEspecial)
                     .addComponent(txtLimiteChequeEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloTaxaRendimentoMensal)
                     .addComponent(txtTaxaRendimentoMensal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAbrirConta)
+                            .addComponent(btnExcluirConta))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListarContas)
+                        .addGap(18, 18, 18)))
+                .addComponent(tituloBuscarContaPeloNumero)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAbrirConta)
-                    .addComponent(btnBuscarConta)
-                    .addComponent(btnListarContas)
-                    .addComponent(btnExcluirConta))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloNumeroConta)
+                    .addComponent(txtNumeroBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarConta))
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,34 +277,128 @@ public class ContaPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtLimiteChequeEspecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLimiteChequeEspecialActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtLimiteChequeEspecialActionPerformed
 
     private void btnAbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirContaActionPerformed
-    
+        try {
+            //lê o cpf e tipo digitados pelo usuário
+        String cpf = txtCpf.getText().trim(); //.trim() -> remove os espaços em branco da string
+        String tipo = txtTipoConta.getText().trim();
+
+        // Busca cliente no banco, chamando o método da classe Banco
+        Cliente cliente = banco.buscarCliente(cpf);
+
+        //declara a variável da nova conta
+        Conta novaConta;
+
+        if (tipo.equalsIgnoreCase("corrente")) { //compara duas strings para verificar se são iguais, ignorando completamente a diferença entre letras maiúsculas e minúsculas.
+
+            double limite = Double.parseDouble(txtLimiteChequeEspecial.getText());
+            novaConta = banco.abrirConta(cliente, "corrente", limite);
+
+        } else if (tipo.equalsIgnoreCase("poupanca") || tipo.equalsIgnoreCase("poupança")) {
+
+            double taxa = Double.parseDouble(txtTaxaRendimentoMensal.getText());
+            novaConta = banco.abrirConta(cliente, "poupanca", taxa);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Tipo inválido. Use 'corrente' ou 'poupanca'.");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this,
+                "Conta criada com sucesso!\nNúmero gerado: " + novaConta.getNumero());
+
+  
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnAbrirContaActionPerformed
 
     private void btnBuscarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarContaActionPerformed
-       
+     try {
+        String numero = txtNumeroBusca.getText().trim();
 
+        if (numero.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite o número da conta para buscar.");
+            return;
+        }
+
+        Conta conta = banco.buscarConta(numero);
+
+        String tipo, limite = "-", taxa = "-";
+
+        if (conta instanceof ContaCorrente cc) {
+            tipo = "CORRENTE";
+            limite = String.valueOf(cc.getLimiteChequeEspecial());
+
+        } else {
+            ContaPoupanca cp = (ContaPoupanca) conta;
+            tipo = "POUPANCA";
+            taxa = String.valueOf(cp.getTaxaRendMensal());
+        }
+
+        String mensagem =
+                "Número da Conta: " + conta.getNumero() + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "CPF do Proprietário: " + conta.getProprietario().getCpf() + "\n" +
+                "Saldo: " + conta.getSaldo() + "\n" +
+                "Limite Cheque Especial: " + limite + "\n" +
+                "Taxa Rendimento Mensal: " + taxa;
+
+        JOptionPane.showMessageDialog(this, mensagem, "Dados da Conta", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao buscar conta:\n" + e.getMessage());
+    }
     }//GEN-LAST:event_btnBuscarContaActionPerformed
 
     private void btnListarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarContasActionPerformed
-       
+        carregarTabela();
 
     }//GEN-LAST:event_btnListarContasActionPerformed
 
     private void btnExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaActionPerformed
-       
+    int linha = tabelaContas.getSelectedRow();
+
+    if (linha == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione uma conta na tabela para excluir.");
+        return;
+    }
+
+    // pega o número da conta da tabela (COLUNA 0)
+    String numero = tabelaContas.getValueAt(linha, 0).toString();
+
+    int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Deseja realmente excluir a conta " + numero + "?",
+            "Excluir Conta",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm != JOptionPane.YES_OPTION) return;
+
+    try {
+        banco.excluirConta(numero);
+        JOptionPane.showMessageDialog(this, "Conta removida com sucesso!");
+        carregarTabela(); // atualiza tabela
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnExcluirContaActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
@@ -259,14 +419,17 @@ public class ContaPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelaContas;
+    private javax.swing.JLabel tituloBuscarContaPeloNumero;
     private javax.swing.JLabel tituloConta;
     private javax.swing.JLabel tituloCpf;
     private javax.swing.JLabel tituloLimiteChequeEspecial;
+    private javax.swing.JLabel tituloNumeroConta;
     private javax.swing.JLabel tituloSaldo;
     private javax.swing.JLabel tituloTaxaRendimentoMensal;
     private javax.swing.JLabel tituloTipoConta;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtLimiteChequeEspecial;
+    private javax.swing.JTextField txtNumeroBusca;
     private javax.swing.JTextField txtSaldo;
     private javax.swing.JTextField txtTaxaRendimentoMensal;
     private javax.swing.JTextField txtTipoConta;

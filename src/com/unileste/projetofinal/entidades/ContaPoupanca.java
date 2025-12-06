@@ -25,11 +25,11 @@ public class ContaPoupanca extends Conta {
             JOptionPane.showMessageDialog(null,"Valor de saque inválido. Use um valor maior do que zero." );
             throw new IllegalArgumentException("Valor de saque inválido");
         }
-        if (valor > saldo){
-            JOptionPane.showMessageDialog(null, "Valor de saque inválido. Use um valor menor ou igual ao saldo disponível.");
-            throw new SaldoInsuficienteException("Saldo insuficiente para o saque.");
+        if (valor > saldo) {
+            adicionarTransacao("Falha no saque: saldo insuficiente. Tentativa de sacar R$ " + String.format("%.2f", valor));
+            throw new SaldoInsuficienteException("Saldo insuficiente.");
         }
-        
+
         saldo -= valor;
         adicionarTransacao("Saque de R$ " + String.format("%.2f", valor));
     }
@@ -42,9 +42,9 @@ public class ContaPoupanca extends Conta {
        }
        
        if(valor > saldo){
-           JOptionPane.showMessageDialog(null, "Valor inválido para a transferência. Use um valor menor ou igual ao saldo disponível");
-           throw new SaldoInsuficienteException("Saldo insuficiente para a transferência.");
-       }else{
+          adicionarTransacao("Falha na transferência: tentativa de enviar R$ " + String.format("%.2f", valor) + " para a conta " + destino.getNumero() + " — saldo insuficiente.");
+          throw new SaldoInsuficienteException("Saldo insuficiente.");     
+        }else{
            // usa o método sacar da própria conta poupança
            this.sacar(valor);
            //usa o método depositar da conta destino

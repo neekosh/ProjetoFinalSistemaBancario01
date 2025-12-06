@@ -175,6 +175,7 @@ public class Banco {
         conta.depositar(valor);                //regra da conta (valida valor etc.)
         //após alterar o saldo em memória, gravar no banco
         contaDAO.atualizar(conta);
+        contas.put(numeroConta, conta); //Atualizando o mapa
     }
     
     public void realizarSaque(String numeroConta, double valor)
@@ -182,6 +183,7 @@ public class Banco {
         Conta conta = buscarConta(numeroConta);
         conta.sacar(valor);
         contaDAO.atualizar(conta);
+        contas.put(numeroConta, conta); //Atualizando o mapa
     }
     public void realizarTransferencias(String contaOrigem, String contaDestino, double valor)
             throws ContaNaoEncontradaException, SaldoInsuficienteException {
