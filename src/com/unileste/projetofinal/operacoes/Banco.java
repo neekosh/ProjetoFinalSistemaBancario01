@@ -193,6 +193,32 @@ public class Banco {
         contaDAO.atualizar(destino);
     }
     
+    
+    //Criei um método adicional de Excluir cliente. Por mais que esse método exista no ClienteDAOJbdc(método excluir) precisei colocar ele aqui pois não posso chamar diretamente métodos das classes.DAO
+    public void excluirCliente(String cpf) {
+    if (cpf == null || cpf.trim().isEmpty()) {
+        throw new IllegalArgumentException("CPF não pode ser vazio.");
+    }
+
+    // remove do banco
+    clienteDAO.remover(cpf);
+
+    // remove da memória
+    clientes.remove(cpf);
+    }
+    
+    //Outro método adicional de Excluir Conta
+    public void excluirConta(String numeroConta) {
+    if (numeroConta == null || numeroConta.trim().isEmpty()) {
+        throw new IllegalArgumentException("Número da conta não pode ser vazio.");
+    }
+    // remove do banco
+    contaDAO.remover(numeroConta);
+
+    // remove da memória
+    contas.remove(numeroConta);
+    }
+
     //retorna a lista de transações (extrato) de uma conta específica
     public List<String> obterExtrato(String numeroConta) throws ContaNaoEncontradaException {
         Conta conta = buscarConta(numeroConta);

@@ -1,12 +1,14 @@
 package com.unileste.projetofinal.gui;
+import com.unileste.projetofinal.operacoes.Banco;
 public class MainFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
-    
+    private Banco banco;
     
     public MainFrame() {
         initComponents();
-       jTabbedPaneAbas.addTab("Clientes", new ClientePanel()); //Colocando uma aba para Clientes
-       jTabbedPaneAbas.addTab("Contas", new ContaPanel()); //Colocando uma aba para Contas
+        banco = new Banco ("Banco Unileste");
+       jTabbedPaneAbas.addTab("Clientes", new ClientePanel(banco)); //Colocando uma aba para Clientes
+       jTabbedPaneAbas.addTab("Contas", new ContaPanel(banco)); //Colocando uma aba para Contas
        jTabbedPaneAbas.addTab("Operações", new OperacoesPanel()); //Colocando uma aba para Operações
     }
 

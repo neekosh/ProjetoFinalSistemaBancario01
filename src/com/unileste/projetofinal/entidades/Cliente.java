@@ -29,13 +29,13 @@ public class Cliente {
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
     public String getEndereco() {
-        return endereco;
+        return this.endereco;
     }
     public List<Conta> getContas() {
         return contas;
