@@ -197,27 +197,42 @@ public class Banco {
     
     
     //Criei um método adicional de Excluir cliente. Por mais que esse método exista no ClienteDAOJbdc(método excluir) precisei colocar ele aqui pois não posso chamar diretamente métodos das classes.DAO
-    public void excluirCliente(String cpf) {
+    public void excluirCliente(String cpf) throws ClienteNaoEncontradoException {
     if (cpf == null || cpf.trim().isEmpty()) {
-        throw new IllegalArgumentException("CPF não pode ser vazio.");
+        throw new IllegalArgumentException("CPF não pode ser nulo ou vazio.");
+    }
+    Cliente cliente = clientes.get(cpf);
+    if (cliente == null) {
+        cliente = clienteDAO.buscarPorCpf(cpf);
+        if (cliente == null) {
+            throw new ClienteNaoEncontradoException("Cliente com CPF " + cpf + " não encontrado.");
+        }
+    }
+    java.util.List<Conta> contasDoCliente = new java.util.ArrayList<>();
+    for (Conta c : contas.values()) {
+        if (c.getProprietario().getCpf().equals(cpf)) {
+            contasDoCliente.add(c);
+        }
     }
 
-    // remove do banco
-    clienteDAO.remover(cpf);
+    for (Conta c : contasDoCliente) {
+        contas.remove(c.getNumero()); 
+        contaDAO.remover(c.getNumero()); 
+    }
 
-    // remove da memória
+    clienteDAO.remover(cpf);
     clientes.remove(cpf);
     }
     
-    //Outro método adicional de Excluir Conta
-    public void excluirConta(String numeroConta) {
+    public void excluirConta(String numeroConta) throws ContaNaoEncontradaException {
     if (numeroConta == null || numeroConta.trim().isEmpty()) {
         throw new IllegalArgumentException("Número da conta não pode ser vazio.");
     }
-    // remove do banco
+    Conta conta = contas.get(numeroConta);
+    if (conta == null) {
+        throw new ContaNaoEncontradaException("Conta " + numeroConta + " não encontrada.");
+    }
     contaDAO.remover(numeroConta);
-
-    // remove da memória
     contas.remove(numeroConta);
     }
 

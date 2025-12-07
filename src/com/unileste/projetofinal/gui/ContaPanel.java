@@ -252,8 +252,8 @@ public class ContaPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAbrirConta)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAbrirConta, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnExcluirConta))
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -318,7 +318,15 @@ public class ContaPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tipo inválido. Use 'corrente' ou 'poupanca'.");
             return;
         }
-
+        
+        String textoSaldo = txtSaldo.getText().trim();
+        if (!textoSaldo.isEmpty()) {
+            double saldoInicial = Double.parseDouble(textoSaldo);
+            if (saldoInicial > 0) {
+                banco.realizarDeposito(novaConta.getNumero(), saldoInicial);
+            }
+        }
+        
         JOptionPane.showMessageDialog(this,
                 "Conta criada com sucesso!\nNúmero gerado: " + novaConta.getNumero());
 
