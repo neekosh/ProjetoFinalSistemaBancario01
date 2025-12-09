@@ -50,11 +50,19 @@ public class Banco {
     for (Cliente c : clienteDAO.listarTodos()) {
         clientes.put(c.getCpf(), c);
     }
-
+    int maiorNumero = 0;
     //carrega todas as contas
     for (Conta conta : contaDAO.listarTodas()) {
         contas.put(conta.getNumero(), conta);
+        try {
+            int n = Integer.parseInt(conta.getNumero());
+            if (n > maiorNumero) {
+                maiorNumero = n;
+            }
+        } catch (NumberFormatException e) {
         }
+    }
+    this.proximoNumeroConta = maiorNumero + 1;
     }
         
     //metodo para cadastrar cliente no banco
